@@ -27,9 +27,19 @@ FreeRTOS-Kernel/portable/MemMang/heap_4.c)
 
 target_include_directories(FreeRTOS PUBLIC FreeRTOS-Kernel/include include/ FreeRTOS-Kernel/portable/GCC/ARM_CM0)
 
+add_library(coreMQTT STATIC 
+coreMQTT/source/core_mqtt.c
+coreMQTT/source/core_mqtt_serializer.c
+coreMQTT/source/core_mqtt_state.c
+)
+
+target_include_directories(coreMQTT PUBLIC coreMQTT/source/include include/ coreMQTT/source/interface)
+
+
+
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(pico_mqtt)
-target_link_libraries(pico_mqtt FreeRTOS)
+target_link_libraries(pico_mqtt FreeRTOS coreMQTT)
 add_custom_command(TARGET pico_mqtt
         POST_BUILD
         COMMAND arm-none-eabi-size pico_mqtt.elf
