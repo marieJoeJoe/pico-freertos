@@ -11,6 +11,9 @@ pico_sdk_init()
 
 add_executable(pico_mqtt
     src/main.c 
+    src/at_task.c 
+    src/mqtt_task.c 
+    src/uart_rcv_task.c 
 )
 
 # Add pico_stdlib library which aggregates commonly used features
