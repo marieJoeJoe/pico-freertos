@@ -38,11 +38,18 @@ coreMQTT/source/core_mqtt_state.c
 
 target_include_directories(coreMQTT PUBLIC coreMQTT/source/include include/ coreMQTT/source/interface)
 
+add_library(coreATC STATIC 
+	coreATC/atc.c
+)
+
+target_include_directories(coreATC PUBLIC coreATC)
+
+
 
 
 # create map/bin/hex/uf2 file in addition to ELF.
 pico_add_extra_outputs(pico_mqtt)
-target_link_libraries(pico_mqtt FreeRTOS coreMQTT)
+target_link_libraries(pico_mqtt FreeRTOS coreMQTT coreATC)
 add_custom_command(TARGET pico_mqtt
         POST_BUILD
         COMMAND arm-none-eabi-size pico_mqtt.elf
