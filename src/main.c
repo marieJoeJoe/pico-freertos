@@ -10,7 +10,7 @@
 #include "at_task.h"
 #include "mqtt_task.h"
 #include "uart_rcv_task.h"
-
+#include "pico/bootrom.h"
 
 #define LED_PIN 25
 
@@ -19,15 +19,38 @@
 
 void GreenLEDTask(void *param);
 
-
 int main() 
 {
-    //stdio_init_all();
+    //printf("rpi pico\n");
 
-    //gpio_init(LED_PIN);
-    //gpio_set_dir(LED_PIN, GPIO_OUT);
+/*
+    stdio_init_all();
+    printf("rpi pico\n");
+
+    char buffer[1024];
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    while(1){
+      scanf("%1024s", buffer);
+      printf("%s\n", buffer);
 
 
+      if (strcmp(buffer, "ON") == 0)
+      {
+        gpio_put(LED_PIN, 1);
+      }
+      else if (strcmp(buffer, "OFF") == 0)
+      {
+        gpio_put(LED_PIN, 0);
+      }
+      else if (strcmp(buffer, "REBOOT") == 0)
+      {
+        reset_usb_boot(0,0);
+      }
+    
+    }
+*/
     TaskHandle_t gLEDtask = NULL;
     TaskHandle_t AtTask = NULL;
     TaskHandle_t UartRcvTask = NULL;
@@ -40,6 +63,7 @@ int main()
                     NULL,
                     tskIDLE_PRIORITY+3,
                     &UartRcvTask);
+/*
     status = xTaskCreate(
                     at_dispatching,
                     "at_task",
@@ -55,9 +79,9 @@ int main()
                     NULL,
                     tskIDLE_PRIORITY+1,
                     &MqttTask);
-
-
+*/
     vTaskStartScheduler();
+
 }
 
 void GreenLEDTask(void *param)
