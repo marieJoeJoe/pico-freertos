@@ -4,6 +4,3 @@
 [submodule "FreeRTOS-Kernel"]
 	path = FreeRTOS-Kernel
 	url = https://github.com/FreeRTOS/FreeRTOS-Kernel
-[submodule "coreMQTT"]
-	path = coreMQTT
-	url = https://github.com/FreeRTOS/coreMQTT

@@ -7,8 +7,6 @@
 #include "FreeRTOSConfig.h"
 #include "task.h"
 
-#include "at_task.h"
-#include "mqtt_task.h"
 #include "uart_rcv_task.h"
 #include "pico/bootrom.h"
 
@@ -23,34 +21,6 @@ int main()
 {
     //printf("rpi pico\n");
 
-/*
-    stdio_init_all();
-    printf("rpi pico\n");
-
-    char buffer[1024];
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
-
-    while(1){
-      scanf("%1024s", buffer);
-      printf("%s\n", buffer);
-
-
-      if (strcmp(buffer, "ON") == 0)
-      {
-        gpio_put(LED_PIN, 1);
-      }
-      else if (strcmp(buffer, "OFF") == 0)
-      {
-        gpio_put(LED_PIN, 0);
-      }
-      else if (strcmp(buffer, "REBOOT") == 0)
-      {
-        reset_usb_boot(0,0);
-      }
-    
-    }
-*/
     TaskHandle_t gLEDtask = NULL;
     TaskHandle_t AtTask = NULL;
     TaskHandle_t UartRcvTask = NULL;
